@@ -19,3 +19,17 @@ class DataService():
         
         return vos
     
+    def find_data(self, id):
+        dto:DataDTO = self.__data_repository.find(id)
+        if dto is None:
+            raise IndexError("Movie not found")
+        
+        return DataVO.fromDto(dto)
+    
+    def delete_data(self, id):
+        data = self.__data_repository.find(id)
+        if data is None:
+            raise IndexError("Movie not found") 
+        
+        self.__data_repository.delete(data)
+    

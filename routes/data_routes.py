@@ -18,7 +18,7 @@ data_model = ns.model('data', {
 })
 
 @ns.route('')
-class DataRoutes(Resource):
+class DatasRoutes(Resource):
 
     _data_service = DataService()
 
@@ -38,3 +38,29 @@ class DataRoutes(Resource):
         
         self._data_service.save_data(data)
         return jsonify(success='Data save with success')
+
+@ns.route('/<int:id>')
+class DataRoutes(Resource):
+
+    _data_service = DataService()
+
+    def get(self, id):
+        if id < 1:
+            abort(403, "Invalid identifier")
+        
+        try:
+            data = self._data_service.find_data(id)
+        except IndexError as e:
+            abort(404, str(e))
+
+        return data.toJson()
+    
+    def delete(self,id):
+        if id < 1:
+            abort(403,'Invalid identifier')
+        try:
+            self._data_service.delete_data(id)
+        except IndexError as e:
+            abort(404, str(e))
+        return jsonify(sucecess='Data deleted eith success')
+
