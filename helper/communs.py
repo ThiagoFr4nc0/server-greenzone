@@ -2,9 +2,9 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 class communs():
 
-    def _toJsonFromData(data):
+    def _toJsonFromArray(arr):
         jsonData = []
-        for m in data:
+        for m in arr:
             jsonData.append(m.toJson())
         return jsonData
 

@@ -47,6 +47,36 @@ def test_get_data_by_id():
     assert response.status_code == 200
     assert data['id'] == data_id
 
+
+def test_update_data():
+
+    response = app.test_client().get('/data')
+    data_response = json.loads(response.data.decode('utf-8'))
+    data_to_put = data_response[-1]
+
+    payload = {
+        "label": data_to_put['label'] + 'TEST',
+        'nitrogen' : data_to_put['nitrogen'] + 1,
+        'phosphor' : data_to_put['phosphor'] + 1,
+        'potassium' : data_to_put['potassium'] + 1,
+        'temperature' : data_to_put['temperature'] + 1,
+        'humidity' : data_to_put['humidity'] + 1
+    }
+
+    response_put = app.test_client().put(f'data/{data_to_put["id"]}', content_type=__CONTENT_TYPE_JSON, data=json.dumps(payload))
+
+    response = app.test_client().get(f'/data/{data_to_put["id"]}')
+    data = json.loads(response.data.decode('utf-8'))
+
+    assert response_put.status_code == 200
+    assert data['id'] == data_to_put['id']
+    assert data['label'] != data_to_put['label']
+    assert data['nitrogen'] != data_to_put['nitrogen']
+    assert data['phosphor'] != data_to_put['phosphor']
+    assert data['potassium'] != data_to_put['potassium']
+    assert data['humidity'] != data_to_put['humidity']
+    assert data['humidity'] != data_to_put['humidity']
+
 def test_delete_data():
 
     response = app.test_client().get('/data')

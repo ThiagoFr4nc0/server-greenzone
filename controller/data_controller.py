@@ -8,5 +8,12 @@ class DataRepository(AbstractRepository):
 
     def update(self, id, data:DataDTO):
         data_current = self.find(id)
+        
+        data_current.label = data.label
+        data_current.nitrogen = data.nitrogen
+        data_current.phosphor = data.phosphor
+        data_current.potassium = data.potassium
+        data_current.humidity = data.humidity
+        data_current.temperature = data.temperature
 
         self._session.commit()

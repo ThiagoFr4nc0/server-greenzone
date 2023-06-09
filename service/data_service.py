@@ -26,6 +26,9 @@ class DataService():
         
         return DataVO.fromDto(dto)
     
+    def update_data(self, id , data:DataVO):
+        self.__data_repository.update(id, data.toDto())        
+    
     def delete_data(self, id):
         data = self.__data_repository.find(id)
         if data is None:

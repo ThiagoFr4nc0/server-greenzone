@@ -7,7 +7,7 @@ from service.data_service import DataService
 ns = Namespace('data',description='routes of data model')
 
 data_model = ns.model('data', {
-    'id': fields.Integer(required=True, description = 'data id'),
+    'id': fields.Integer(required=False, description = 'data id'),
     'label' : fields.String(required=True, description = 'data id'),
     'nitrogen' : fields.Float(required=True, description = 'data id'),
     'phosphor' : fields.Float(required=True, description = 'data id'),
@@ -24,7 +24,7 @@ class DatasRoutes(Resource):
 
     @ns.response(200,"Sucess",data_model)
     def get(self):
-        return communs._toJsonFromData(self._data_service.get_all_data())
+        return communs._toJsonFromArray(self._data_service.get_all_data())
 
     @ns.expect(data_model)
     def post(self):
@@ -54,6 +54,17 @@ class DataRoutes(Resource):
             abort(404, str(e))
 
         return data.toJson()
+    
+    @ns.expect(data_model)
+    def put(self,id):
+        body = request.get_json()
+        try:
+            data = DataVO()
+            data.fromJson(body)
+        except ValueError as e:
+            abort(400, e)
+        self._data_service.update_data(id,data)
+        return jsonify(success='Data save with success')
     
     def delete(self,id):
         if id < 1:
