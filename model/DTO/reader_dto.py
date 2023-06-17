@@ -8,7 +8,7 @@ class ReaderDTO(Base):
     model = Column(String, nullable=False)
     lot = Column(Integer, nullable = False)
     manufac_date = Column(Date, nullable=False) 
-    buy_date = Column(Date, nullable=False)
+    buy_date = Column(Date, nullable=True)
     type = Column(String, nullable=False)
 
     #   || ID ||  Code  || Manufac_Date ||   Buy_Date  ||     Type     ||

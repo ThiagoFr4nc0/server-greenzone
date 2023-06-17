@@ -15,8 +15,8 @@ def test_create_data():
         "model":"Top demais",
         'lot' : 1,
         'manufac_date' : date.today(),
-        'buy_date' : date.today(),
-        'type' : 1,
+        'buy_date' : None,
+        'type' : "type",
 
     }
 
