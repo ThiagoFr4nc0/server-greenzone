@@ -1,7 +1,6 @@
 from model.VO.data_vo import DataVO
 from model.DTO.data_dto import DataDTO
 from controller.data_controller import DataRepository
-import os
 
 class DataService():
 

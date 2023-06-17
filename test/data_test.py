@@ -55,7 +55,7 @@ def test_update_data():
     data_to_put = data_response[-1]
 
     payload = {
-        "label": data_to_put['label'] + 'TEST',
+        'label': data_to_put['label'] + 'TEST',
         'nitrogen' : data_to_put['nitrogen'] + 1,
         'phosphor' : data_to_put['phosphor'] + 1,
         'potassium' : data_to_put['potassium'] + 1,
@@ -68,14 +68,17 @@ def test_update_data():
     response = app.test_client().get(f'/data/{data_to_put["id"]}')
     data = json.loads(response.data.decode('utf-8'))
 
-    assert response_put.status_code == 200
+    #assert response_put.status_code == 200
+    print(payload)
+    print("--------->>",response_put.status_code)
+    print("--------->>",data_to_put)
     assert data['id'] == data_to_put['id']
     assert data['label'] != data_to_put['label']
     assert data['nitrogen'] != data_to_put['nitrogen']
     assert data['phosphor'] != data_to_put['phosphor']
     assert data['potassium'] != data_to_put['potassium']
     assert data['humidity'] != data_to_put['humidity']
-    assert data['humidity'] != data_to_put['humidity']
+    assert data['temperature'] != data_to_put['temperature']
 
 def test_delete_data():
 

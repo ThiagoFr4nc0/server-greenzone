@@ -1,6 +1,6 @@
 from typing import Generic, TypeVar
 from connection.db_cofig import DBConfig
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker,lazyload
 
 M = TypeVar('M')
 
@@ -26,4 +26,5 @@ class AbstractRepository(Generic[M]):
         return self._session.query(self.__class)
     
     def find(self, id):
+        #self._session.query(self.__class).options(lazyload(atribute)).get(id)
         return self._session.query(self.__class).get(id)

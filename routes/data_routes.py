@@ -1,7 +1,7 @@
 from helper.communs import communs
 from flask_restx import Resource,Namespace,fields
 from model.VO.data_vo import DataVO
-from flask import request, abort, jsonify, send_file
+from flask import request, abort, jsonify
 from service.data_service import DataService
 
 ns = Namespace('data',description='routes of data model')

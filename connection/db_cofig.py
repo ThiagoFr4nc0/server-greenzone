@@ -2,6 +2,7 @@ from connection.base import Base
 from sqlalchemy import create_engine
 
 from model.DTO.data_dto import DataDTO
+from model.DTO.reader_dto import ReaderDTO
 
 class DBConfig:    
     
@@ -18,7 +19,7 @@ class DBConfig:
 
         #Connection String DB
         db_string = "postgresql://postgres:sql@127.0.0.1:5432/api_greenzone"
-        #db_string = "postgresql://postgres:root@127.0.0.1:5432/api"
+        #db_string = "postgresql://postgres:root@127.0.0.1:5432/api_greenzone"
         conn = create_engine(db_string)
         
         Base.metadata.create_all(conn.engine)

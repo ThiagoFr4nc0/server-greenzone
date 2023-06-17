@@ -1,4 +1,3 @@
-from datetime import datetime
 from controller.data_controller import DataDTO
 
 class DataVO():
