@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, Sequence, String, Double 
 from connection.base import Base
+from sqlalchemy.orm import relationship
 
 class DataDTO(Base):
     __tablename__ = 'data'
@@ -11,7 +12,7 @@ class DataDTO(Base):
     potassium = Column(Double, nullable=False)
     temperature = Column(Integer, nullable=True)
     humidity = Column(Integer, nullable=True)
-
+    sample = relationship("SampleDTO")
     #   || ID ||   label  ||  Nitrogen   ||   Phosphor   ||   Potassium   ||  Temperature  ||  humidity  ||
     #   || 1  ||   rice   ||    11.0     ||      7.5     ||     12.9      ||      20       ||     80     ||    
     #   || 2  ||  coffee  ||    18.5     ||      9.4     ||     10.1      ||      18       ||     38     || 

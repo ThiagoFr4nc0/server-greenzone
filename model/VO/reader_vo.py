@@ -8,8 +8,8 @@ class ReaderVO():
         self.id = None
         self.model = ''
         self.lot = None 
-        self.manufac_date = 0 #datetime.date.today()
-        self.buy_date = 0 #datetime.date.today()
+        self.manufac_date = 0 
+        self.buy_date = 0 
         self.type = ''
 
     
