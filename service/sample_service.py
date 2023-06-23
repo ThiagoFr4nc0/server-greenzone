@@ -15,10 +15,8 @@ class SampleService():
 
     def save_sample(self, sample:SampleVO):
         sample_dto:SampleDTO = sample.toDto()
-
-        self.__data_repository.patch_close(sample_dto.label , sample_dto.id)
-        self.__reader_repository.patch_close(sample_dto.code , sample_dto.id)
         self.__sample_repository.add(sample_dto)
+        
     
     def get_all_sample(self):
         vos = []
@@ -36,6 +34,10 @@ class SampleService():
         
         return SampleVO.fromDto(dto)
     
+
+    def patch_close(self, sample:SampleVO):
+        sample_dto:SampleDTO = sample.toDto()
+        self.__data_repository.patch_close(sample_dto.label , sample_dto.id)
     
     def delete_sample(self, id):
         sample = self.__sample_repository.find(id)
@@ -57,4 +59,5 @@ class SampleService():
         file_image = open(os.path.join(self.STORAGE_PATH, filename), 'wb')
         file_image.write(blob)
         file_image.close()
+
     

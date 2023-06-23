@@ -18,9 +18,8 @@ class DataRepository(AbstractRepository):
 
         self._session.commit()
 
-    def patch_close (self, id, date:int):
-        data_current:DataDTO = self.find(id)
-
-        data_current.sample_id = date
+    def patch_close (self, id, sample_id:int):
+        data_current = self.find(id)
+        data_current.sample_id = sample_id
 
         self._session.commit()

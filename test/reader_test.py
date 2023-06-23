@@ -68,10 +68,7 @@ def test_update_data():
     response = app.test_client().get(f'/reader/{data_to_put["id"]}')
     data = json.loads(response.data.decode('utf-8'))
 
-    #assert response_put.status_code == 200
-    print(payload)
-    print("--------->>",response_put.status_code)
-    print("--------->>",data_to_put)
+    assert response_put.status_code == 200
     assert data['id'] == data_to_put['id']
     assert data['label'] != data_to_put['label']
     assert data['nitrogen'] != data_to_put['nitrogen']

@@ -57,6 +57,17 @@ class SampleRoutes(Resource):
 
         return sample.toJsonFull(code , label)
     
+
+    
+    def patch(self,id):
+        if id < 1:
+            abort(403, "Invalid identifier")
+        try:
+            sample = self._sample_service.find_sample(id)
+        except ValueError as e:
+            abort(400, e)
+        self._sample_service.patch_close(sample)
+        return jsonify(success='Data save with success')
     
     def delete(self,id):
         if id < 1:
