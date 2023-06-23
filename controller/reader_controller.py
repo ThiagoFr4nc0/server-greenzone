@@ -24,4 +24,11 @@ class ReaderRepository(AbstractRepository):
         reader_current.buy_date = date
 
         self._session.commit()
+
+    def patch_close (self, id, date:int):
+        reader_current:ReaderDTO = self.find(id)
+
+        reader_current.sample_id = date
+
+        self._session.commit()
         

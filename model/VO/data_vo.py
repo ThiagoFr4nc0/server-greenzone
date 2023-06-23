@@ -10,6 +10,7 @@ class DataVO():
         self.potassium = 0
         self.temperature = 0
         self.humidity = 0
+        self.sample_id = 0
 
     
     
@@ -23,6 +24,7 @@ class DataVO():
         vo.potassium = dto.potassium
         vo.temperature = dto.temperature
         vo.humidity = dto.humidity
+        vo.sample_id = dto.sample_id
 
         return vo
     
@@ -33,6 +35,7 @@ class DataVO():
         self.potassium = Validations._is_elements_empty_validation(json,'potassium')
         self.temperature = Validations._is_elements_empty_validation(json,'temperature')
         self.humidity = Validations._is_elements_empty_validation(json,'humidity')
+        self.sample_id = None
     
     def toDto(self):
         dto = DataDTO()
@@ -43,6 +46,7 @@ class DataVO():
         dto.potassium = self.potassium
         dto.temperature = self.temperature
         dto.humidity = self.humidity
+        dto.sample_id = self.sample_id
 
         return dto
 

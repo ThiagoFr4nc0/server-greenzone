@@ -1,13 +1,21 @@
 from model.VO.sample_vo import SampleVO
 from model.DTO.sample_dto import SampleDTO
 from controller.sample_controller import SampleRepository
+from controller.data_controller import DataRepository
+from controller.reader_controller import ReaderRepository
 
 class SampleService():
 
     __sample_repository = SampleRepository()
+    __data_repository = DataRepository()
+    __reader_repository = ReaderRepository()
 
     def save_sample(self, sample:SampleVO):
-        self.__sample_repository.add(sample.toDto())
+        sample_dto:SampleDTO = sample.toDto()
+
+        self.__data_repository.patch_close(sample_dto.label , sample_dto.id)
+        self.__reader_repository.patch_close(sample_dto.code , sample_dto.id)
+        self.__sample_repository.add(sample_dto)
     
     def get_all_sample(self):
         vos = []

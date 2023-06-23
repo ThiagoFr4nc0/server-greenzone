@@ -17,3 +17,10 @@ class DataRepository(AbstractRepository):
         data_current.temperature = data.temperature
 
         self._session.commit()
+
+    def patch_close (self, id, date:int):
+        data_current:DataDTO = self.find(id)
+
+        data_current.sample_id = date
+
+        self._session.commit()

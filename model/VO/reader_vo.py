@@ -10,6 +10,7 @@ class ReaderVO():
         self.manufac_date = 0 
         self.buy_date = 0 
         self.type = ''
+        self.sample_id = 0
 
 
     @staticmethod
@@ -21,6 +22,7 @@ class ReaderVO():
         vo.manufac_date = str(dto.manufac_date)
         vo.buy_date = str(dto.buy_date)
         vo.type = dto.type
+        vo.sample_id = dto.sample_id
 
         return vo
     
@@ -30,6 +32,7 @@ class ReaderVO():
         self.manufac_date = Validations._is_date_validation(json,'manufac_date')
         self.buy_date = None
         self.type = Validations._is_text_empty_validation(json,'type')
+        self.sample_id = None
     
     def toDto(self):
         dto = ReaderDTO()
@@ -39,6 +42,7 @@ class ReaderVO():
         dto.manufac_date = self.manufac_date
         dto.buy_date = self.buy_date
         dto.type = self.type
+        dto.sample_id = self.sample_id
 
         return dto
 
