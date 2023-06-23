@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Sequence, String, Date
+from sqlalchemy import Column, Integer, ForeignKey,Sequence, String, Date
 from connection.base import Base
 from sqlalchemy.orm import relationship
 
@@ -11,7 +11,7 @@ class ReaderDTO(Base):
     manufac_date = Column(Date, nullable=False) 
     buy_date = Column(Date, nullable=True)
     type = Column(String, nullable=False)
-    sample = relationship("SampleDTO")
+    sample = relationship("SampleDTO")#Column(Integer, ForeignKey("sample.id"), nullable=False)
 
     #   || ID ||  Code  || Manufac_Date ||   Buy_Date  ||     Type     ||
     #   || 1  || SS001  ||  19/05/2023  ||  01/06/2023 ||   NPK SOIL   ||

@@ -1,5 +1,5 @@
 from controller.data_controller import DataDTO
-
+from helper.validations import Validations
 class DataVO():
 
     def __init__(self):
@@ -36,12 +36,12 @@ class DataVO():
         return vo
     
     def fromJson(self, json): 
-        self.label =  self._is_text_empty_validation(json,'label')
-        self.nitrogen = self._is_elements_empty_validation(json,'nitrogen')
-        self.phosphor = self._is_elements_empty_validation(json,'phosphor')
-        self.potassium = self._is_elements_empty_validation(json,'potassium')
-        self.temperature = self._is_elements_empty_validation(json,'temperature')
-        self.humidity = self._is_elements_empty_validation(json,'humidity')
+        self.label =  Validations._is_text_empty_validation(json,'label')
+        self.nitrogen = Validations._is_elements_empty_validation(json,'nitrogen')
+        self.phosphor = Validations._is_elements_empty_validation(json,'phosphor')
+        self.potassium = Validations._is_elements_empty_validation(json,'potassium')
+        self.temperature = Validations._is_elements_empty_validation(json,'temperature')
+        self.humidity = Validations._is_elements_empty_validation(json,'humidity')
     
     def toDto(self):
         dto = DataDTO()

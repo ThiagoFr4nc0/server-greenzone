@@ -1,5 +1,5 @@
 from controller.sample_controller import SampleDTO
-from datetime import date , datetime
+from helper.validations import Validations
 
 class SampleVO():
 
@@ -8,17 +8,6 @@ class SampleVO():
         self.code = 0
         self.reading_Date = 0
         self.label = 0
-
-    def _is_elements_empty_validation(self, json, att_name):
-        if not att_name in json or json[att_name] is None or not isinstance(json[att_name], int) or json[att_name] <= 0:
-            raise ValueError(f"The attribute {att_name} is invalid!")
-        return json[att_name]
-    
-    def _is_date_validation(self, json, att_name):
-        datetime_obj:datetime = datetime.strptime(json[att_name], '%Y-%m-%d')  
-        if not att_name in json or json[att_name] is None or  datetime_obj.date() > date.today():
-           raise ValueError(f"The attribute {att_name} is invalid!")
-        return json[att_name]
 
     @staticmethod
     def fromDto(dto:SampleDTO):
@@ -31,9 +20,9 @@ class SampleVO():
         return vo
     
     def fromJson(self, json): 
-        self.code = self._is_elements_empty_validation(json,'code')
-        self.reading_Date = self._is_date_validation(json,'reading_Date')
-        self.label = self._is_elements_empty_validation(json,'label')
+        self.code = Validations._is_elements_empty_validation(json,'code')
+        self.reading_Date = Validations._is_date_validation(json,'reading_Date')
+        self.label = Validations._is_elements_empty_validation(json,'label')
     
     def toDto(self):
         dto = SampleDTO()
