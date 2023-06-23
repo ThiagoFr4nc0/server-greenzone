@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 
 from model.DTO.data_dto import DataDTO
 from model.DTO.reader_dto import ReaderDTO
+from model.DTO.sample_dto import SampleDTO
 
 class DBConfig:    
     

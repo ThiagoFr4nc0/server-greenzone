@@ -34,18 +34,18 @@ class SampleVO():
         return dto
 
     def toJsonSimple(self):
-        json = []
-        json['id'] = self.id.__dict__.copy()
-        json['code'] = self.code.__dict__.copy()
-        json['reading_Date'] = self.reading_Date.__dict__.copy()
-        json['label'] = self.label.__dict__.copy()
+        json = {}
+        json['id'] = self.id
+        json['code'] = self.code
+        json['reading_Date'] = str(self.reading_Date)
+        json['label'] = self.label
         return json
 
     def toJsonFull(self, code, label):
-        json = []
-        json['id'] = self.id.__dict__.copy()
+        json = {}
+        json['id'] = self.id
         json['code'] = code.__dict__.copy()
-        json['reading_Date'] = self.reading_Date.__dict__.copy()
+        json['reading_Date'] = str(self.reading_Date)
         json['label'] = label.__dict__.copy()
         return json
 

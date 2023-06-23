@@ -2,6 +2,8 @@ from helper.communs import communs
 from flask_restx import Resource,Namespace,fields
 from model.VO.sample_vo import SampleVO
 from flask import request, abort, jsonify
+from service.data_service import DataService
+from service.reader_servico import ReaderService
 from service.sample_service import SampleService
 
 ns = Namespace('sample',description='routes of sample model')
@@ -14,13 +16,13 @@ sample_model = ns.model('sample', {
 })
 
 @ns.route('')
-class DatasRoutes(Resource):
+class SamplesRoutes(Resource):
 
     _sample_service = SampleService()
 
     @ns.response(200,"Sucess",sample_model)
     def get(self):
-        return communs._toJsonFromArray(self._sample_service.get_all_sample())
+        return communs._toJsonFromSimple(self._sample_service.get_all_sample())
 
     @ns.expect(sample_model)
     def post(self):
@@ -36,9 +38,11 @@ class DatasRoutes(Resource):
         return jsonify(success='Sample save with success')
 
 @ns.route('/<int:id>')
-class DataRoutes(Resource):
+class SampleRoutes(Resource):
 
     _sample_service = SampleService()
+    _data_service = DataService()
+    _reader_service = ReaderService()
 
     def get(self, id):
         if id < 1:
@@ -46,10 +50,12 @@ class DataRoutes(Resource):
         
         try:
             sample = self._sample_service.find_sample(id)
+            code = self._reader_service.find_reader(sample.code)
+            label = self._data_service.find_data(sample.label)
         except IndexError as e:
             abort(404, str(e))
 
-        return sample.toJsonSimple()
+        return sample.toJsonFull(code , label)
     
     
     def delete(self,id):

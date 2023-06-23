@@ -7,6 +7,12 @@ class communs():
         for m in arr:
             jsonData.append(m.toJson())
         return jsonData
+    
+    def _toJsonFromSimple(arr):
+        jsonData = []
+        for m in arr:
+            jsonData.append(m.toJsonSimple())
+        return jsonData
 
     def _allowed_file(filename):
         return '.' in filename and \
