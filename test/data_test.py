@@ -20,13 +20,18 @@ def test_create_data():
 
     }
 
+
+    response_post = app.test_client().post('/data', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
+    response_post = app.test_client().post('/data', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
+    response_post = app.test_client().post('/data', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
+    response_post = app.test_client().post('/data', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
     response_post = app.test_client().post('/data', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
     
     response = app.test_client().get('/data')
     data_after = json.loads(response.data.decode('utf-8'))
     
     assert response_post.status_code == 200
-    assert len(data_before) + 1 == len(data_after)
+    assert len(data_before) + 5 == len(data_after)
 
 def test_get_all_data():
     response = app.test_client().get('/data')
@@ -63,9 +68,8 @@ def test_update_data():
         'humidity' : data_to_put['humidity'] + 1
         
     }
-    print(payload)
 
-    response_put = app.test_client().put(f'data/{data_to_put["id"]}', content_type=__CONTENT_TYPE_JSON, data=json.dumps(payload))
+    response_put = app.test_client().put(f'data/{data_to_put["id"]}', content_type=__CONTENT_TYPE_JSON, data=json.dumps(data_to_put))
 
     response = app.test_client().get(f'/data/{data_to_put["id"]}')
     data = json.loads(response.data.decode('utf-8'))

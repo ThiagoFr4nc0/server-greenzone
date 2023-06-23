@@ -11,9 +11,9 @@ def test_create_data():
     data_before = json.loads(response.data.decode('utf-8'))
     
     payload = {
-        "code": 1,
+        "code": 6,
         "reading_Date": "2023-06-21",
-        "label": 1
+        "label": 6
     }
 
     response_post = app.test_client().post('/sample', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
@@ -54,7 +54,6 @@ def test_pacth():
     response = app.test_client().get(f'/sample/{data_id}')
     data_aftter = json.loads(response.data.decode('utf-8'))
     
-    print(data_aftter)
     assert response.status_code == 200
     assert data_aftter['label']['sample_id'] == data_id
 

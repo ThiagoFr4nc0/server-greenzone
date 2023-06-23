@@ -12,7 +12,7 @@ def test_create_data():
     data_before = json.loads(response.data.decode('utf-8'))
     
     payload = {
-        "model":"Top demais",
+        "model":"Model NPK",
         'lot' : 1,
         'manufac_date' : "2023-06-21",
         'buy_date' : None,
@@ -21,12 +21,16 @@ def test_create_data():
     }
 
     response_post = app.test_client().post('/reader', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
+    response_post = app.test_client().post('/reader', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
+    response_post = app.test_client().post('/reader', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
+    response_post = app.test_client().post('/reader', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
+    response_post = app.test_client().post('/reader', data = json.dumps(payload),content_type= __CONTENT_TYPE_JSON)
     
     response = app.test_client().get('/reader')
     data_after = json.loads(response.data.decode('utf-8'))
     
     assert response_post.status_code == 200
-    assert len(data_before) + 1 == len(data_after)
+    assert len(data_before) + 5 == len(data_after)
 
 def test_get_all_data():
     response = app.test_client().get('/reader')
