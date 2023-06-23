@@ -65,7 +65,7 @@ def test_delete_data():
     response = app.test_client().get('/sample')
     data = json.loads(response.data.decode('utf-8'))
     
-    response_del = app.test_client().delete(f'/sample/{data[-1]["id"]}')
+    response_del = app.test_client().delete(f'sample/{data[-1]["id"]}')
 
     response = app.test_client().get('/sample')
     data_after = json.loads(response.data.decode('utf-8'))
