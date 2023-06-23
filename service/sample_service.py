@@ -30,7 +30,7 @@ class SampleService():
     def find_sample(self, id):
         dto:SampleDTO = self.__sample_repository.find(id)
         if dto is None:
-            raise IndexError("Movie not found")
+            raise IndexError(" not found")
         
         return SampleVO.fromDto(dto)
     
@@ -42,7 +42,7 @@ class SampleService():
     def delete_sample(self, id):
         sample = self.__sample_repository.find(id)
         if sample is None:
-            raise IndexError("Movie not found") 
+            raise IndexError(" not found") 
         
         self.__sample_repository.delete(sample)
 

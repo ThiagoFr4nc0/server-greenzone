@@ -14,7 +14,7 @@ def test_create_data():
     payload = {
         "model":"Top demais",
         'lot' : 1,
-        'manufac_date' : date.today(),
+        'manufac_date' : "2023-06-21",
         'buy_date' : None,
         'type' : "type",
 
@@ -76,6 +76,24 @@ def test_update_data():
     assert data['potassium'] != data_to_put['potassium']
     assert data['humidity'] != data_to_put['humidity']
     assert data['temperature'] != data_to_put['temperature']
+
+def test_patch_data():
+
+    response = app.test_client().get('/reader')
+    data_response = json.loads(response.data.decode('utf-8'))
+    data_to_put = data_response[-1]
+
+    payload = {
+        'date' : "2023-06-19",
+    }
+
+    response_patch = app.test_client().patch(f'reader/{data_to_put["id"]}', content_type=__CONTENT_TYPE_JSON, data=json.dumps(payload))
+
+    response = app.test_client().get(f'/reader/{data_to_put["id"]}')
+    data = json.loads(response.data.decode('utf-8'))
+
+    assert response_patch.status_code == 200
+    assert data['id'] == data_to_put['id']
 
 def test_delete_data():
 

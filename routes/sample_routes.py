@@ -83,10 +83,10 @@ class SampleRoutes(Resource):
 class SampleReviewEndpoint(Resource):
     _sample_service = SampleService()
 
-    #@ns.doc(params={'id':'id of Movie'}, description='Get a review of movie by ID')
+    #@ns.doc(params={'id':'id of Sample'}, description='Get a review of Sample by ID')
     @ns.response(200, 'Success')
     @ns.response(403, 'Invalid identifier')
-    @ns.response(404, 'Movie not found')
+    @ns.response(404, 'Sample not found')
     def get(self, id):
         if id < 1:
             abort(403, "Invalid idenfier")
@@ -97,12 +97,12 @@ class SampleReviewEndpoint(Resource):
         except IndexError or FileNotFoundError as e:
             abort(404, str(e))
 
-    #@ns.doc(params={'id':'id of Movie'}, description='Save a review of movie by ID')
+    #@ns.doc(params={'id':'id of Sample'}, description='Save a review of Sample by ID')
     @ns.response(200, 'Success')
     @ns.response(400, 'Invalid values attributes')
     @ns.response(403, 'Invalid identifier')
-    @ns.response(404, 'Movie not found')
-    @ns.response(409, 'Movie has a review')
+    @ns.response(404, 'Sample not found')
+    @ns.response(409, 'Sample has a review')
     @ns.response(413, 'Invalid file size')
     def post(self, id):
         if id < 1:
@@ -123,12 +123,12 @@ class SampleReviewEndpoint(Resource):
             sample = self._sample_service.find_sample(id)
             current_file = self._sample_service.find_file(str(id))
             if current_file:
-                abort(409, f'Movie {sample.id} has a review.')
+                abort(409, f'Sample {sample.id} has a review.')
         except IndexError as e:
             abort(404, str(e))
         except FileNotFoundError:
             pass
 
         self._sample_service.save_file(file,blob,id)
-        return jsonify(success="Movie review has been successfully added!")
+        return jsonify(success="Sample review has been successfully added!")
 

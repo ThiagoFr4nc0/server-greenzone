@@ -11,12 +11,12 @@ def test_create_data():
     data_before = json.loads(response.data.decode('utf-8'))
     
     payload = {
-        "label":"Top demais",
-        'nitrogen' : 1,
-        'phosphor' : 1,
-        'potassium' : 1,
-        'temperature' : 1,
-        'humidity' : 1
+        "label":"Uva",
+        'nitrogen' : 80,
+        'phosphor' : 30,
+        'potassium' : 45,
+        'temperature' : 25,
+        'humidity' : 10
 
     }
 
@@ -55,23 +55,22 @@ def test_update_data():
     data_to_put = data_response[-1]
 
     payload = {
-        'label': data_to_put['label'] + 'TEST',
-        'nitrogen' : data_to_put['nitrogen'] + 1,
+        "label": data_to_put['label'] + ' TEST',
+        "nitrogen" : data_to_put['nitrogen'] + 1,
         'phosphor' : data_to_put['phosphor'] + 1,
         'potassium' : data_to_put['potassium'] + 1,
         'temperature' : data_to_put['temperature'] + 1,
         'humidity' : data_to_put['humidity'] + 1
+        
     }
+    print(payload)
 
     response_put = app.test_client().put(f'data/{data_to_put["id"]}', content_type=__CONTENT_TYPE_JSON, data=json.dumps(payload))
 
     response = app.test_client().get(f'/data/{data_to_put["id"]}')
     data = json.loads(response.data.decode('utf-8'))
 
-    #assert response_put.status_code == 200
-    print(payload)
-    print("--------->>",response_put.status_code)
-    print("--------->>",data_to_put)
+    assert response_put.status_code == 200
     assert data['id'] == data_to_put['id']
     assert data['label'] != data_to_put['label']
     assert data['nitrogen'] != data_to_put['nitrogen']

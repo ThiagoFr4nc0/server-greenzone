@@ -21,7 +21,7 @@ class ReaderService():
     def find_reader(self, id):
         dto:ReaderDTO = self.__reader_repository.find(id)
         if dto is None:
-            raise IndexError("Movie not found")
+            raise IndexError(" not found")
         
         return ReaderVO.fromDto(dto)
     
@@ -34,7 +34,7 @@ class ReaderService():
     def delete_data(self, id):
         data = self.__reader_repository.find(id)
         if data is None:
-            raise IndexError("Movie not found") 
+            raise IndexError(" not found") 
         
         self.__reader_repository.delete(data)
     
