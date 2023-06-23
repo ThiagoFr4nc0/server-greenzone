@@ -11,7 +11,6 @@ class SampleService():
 
     __sample_repository = SampleRepository()
     __data_repository = DataRepository()
-    __reader_repository = ReaderRepository()
 
     def save_sample(self, sample:SampleVO):
         sample_dto:SampleDTO = sample.toDto()
@@ -40,10 +39,9 @@ class SampleService():
         self.__data_repository.patch_close(sample_dto.label , sample_dto.id)
     
     def delete_sample(self, id):
-        sample = self.__sample_repository.find(id)
+        sample:SampleDTO = self.__sample_repository.find(id)
         if sample is None:
             raise IndexError(" not found") 
-        
         self.__sample_repository.delete(sample)
 
 

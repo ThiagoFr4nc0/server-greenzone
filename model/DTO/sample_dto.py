@@ -8,6 +8,7 @@ class SampleDTO(Base):
     id = Column(Integer, Sequence('seq_sample_pk'), primary_key=True, autoincrement=True)
     code = Column(Integer, ForeignKey("reader.id"), nullable=False)
     reading_Date = Column(Date, nullable=False)
+    #sample = relationship("DataDTO")
     label = Column(Integer, ForeignKey("data.id"), nullable=False)
 
     #   || ID ||  Code  || Reading_Date ||   Class   ||

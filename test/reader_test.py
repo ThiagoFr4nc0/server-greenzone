@@ -55,12 +55,11 @@ def test_update_data():
     data_to_put = data_response[-1]
 
     payload = {
-        'label': data_to_put['label'] + 'TEST',
-        'nitrogen' : data_to_put['nitrogen'] + 1,
-        'phosphor' : data_to_put['phosphor'] + 1,
-        'potassium' : data_to_put['potassium'] + 1,
-        'temperature' : data_to_put['temperature'] + 1,
-        'humidity' : data_to_put['humidity'] + 1
+        'labmodelel': data_to_put['model'] + 'TEST',
+        'lot' : data_to_put['lot'] + 1,
+        'manufac_date' : data_to_put['manufac_date'],
+        'buy_date' : data_to_put['buy_date'],
+        'type' : data_to_put['type'] + ' TEST',
     }
 
     response_put = app.test_client().put(f'reader/{data_to_put["id"]}', content_type=__CONTENT_TYPE_JSON, data=json.dumps(payload))
@@ -70,12 +69,11 @@ def test_update_data():
 
     assert response_put.status_code == 200
     assert data['id'] == data_to_put['id']
-    assert data['label'] != data_to_put['label']
-    assert data['nitrogen'] != data_to_put['nitrogen']
-    assert data['phosphor'] != data_to_put['phosphor']
-    assert data['potassium'] != data_to_put['potassium']
-    assert data['humidity'] != data_to_put['humidity']
-    assert data['temperature'] != data_to_put['temperature']
+    assert data['labmodelel'] != data_to_put['labmodelel']
+    assert data['lot'] != data_to_put['lot']
+    assert data['manufac_date'] != data_to_put['manufac_date']
+    assert data['buy_date'] != data_to_put['buy_date']
+    assert data['type'] != data_to_put['type']
 
 def test_patch_data():
 

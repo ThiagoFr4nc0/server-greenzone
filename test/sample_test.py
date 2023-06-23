@@ -51,10 +51,10 @@ def test_pacth():
     data_id = data[-1]['id']
     response = app.test_client().patch(f'/sample/{data_id}')
 
-    response = app.test_client().get('/sample')
+    response = app.test_client().get(f'/sample/{data_id}')
     data_aftter = json.loads(response.data.decode('utf-8'))
     
-    
+    print(data_aftter)
     assert response.status_code == 200
     assert data_aftter['label']['sample_id'] == data_id
 
@@ -65,7 +65,8 @@ def test_delete_data():
     response = app.test_client().get('/sample')
     data = json.loads(response.data.decode('utf-8'))
     
-    response_del = app.test_client().delete(f'sample/{data[-1]["id"]}')
+    print(data[-1]["id"])
+    response_del = app.test_client().delete(f'/sample/{data[-1]["id"]}')
 
     response = app.test_client().get('/sample')
     data_after = json.loads(response.data.decode('utf-8'))
