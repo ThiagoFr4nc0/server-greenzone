@@ -52,8 +52,7 @@ class SampleService():
                     return os.path.join(path, filename)
         raise FileNotFoundError('File not found')
     
-    def save_file(self, file , id):
-        blob = file.read()
+    def save_file(self, file, blob , id):
         filename = str(id) + '.' + file.filename.split('.')[-1]
         file_image = open(os.path.join(self.STORAGE_PATH, filename), 'wb')
         file_image.write(blob)
