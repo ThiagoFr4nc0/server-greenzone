@@ -36,5 +36,5 @@ class ReaderService():
         if data is None:
             raise IndexError(" not found") 
         
-        self.__reader_repository.delete(data)
+        self.__reader_repository.delete_all_by_reader(data.id)
     

@@ -9,7 +9,7 @@ class SampleDTO(Base):
     code = Column(Integer, ForeignKey("reader.id"), nullable=False)
     reading_Date = Column(Date, nullable=False)
     #sample = relationship("DataDTO")
-    label = Column(Integer, ForeignKey("data.id"), nullable=False)
+    label = Column(Integer, ForeignKey("data.id", ondelete="CASCADE"), nullable=False)
 
     #   || ID ||  Code  || Reading_Date ||   Class   ||
     #   || 1  ||   FK   ||  05/06/2023  ||    rice   ||    

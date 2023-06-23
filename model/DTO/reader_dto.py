@@ -11,7 +11,7 @@ class ReaderDTO(Base):
     manufac_date = Column(Date, nullable=False) 
     buy_date = Column(Date, nullable=True)
     type = Column(String, nullable=False)
-    sample = relationship("SampleDTO")#Column(Integer, ForeignKey("sample.id"), nullable=True)
+    sample = relationship("SampleDTO",cascade='delete')
 
     #   || ID ||  Code  || Manufac_Date ||   Buy_Date  ||     Type     ||
     #   || 1  || SS001  ||  19/05/2023  ||  01/06/2023 ||   NPK SOIL   ||

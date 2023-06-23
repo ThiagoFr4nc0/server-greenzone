@@ -1,5 +1,6 @@
 from controller.abstract_controller import AbstractRepository
 from model.DTO.reader_dto import ReaderDTO
+from model.DTO.sample_dto import SampleDTO
 from datetime import date
 
 class ReaderRepository(AbstractRepository):
@@ -23,6 +24,12 @@ class ReaderRepository(AbstractRepository):
 
         reader_current.buy_date = date
 
+        self._session.commit()
+
+    def delete_all_by_reader(self, id):
+        reader_current:ReaderDTO = self.find(id)
+        self._session.query(SampleDTO).filter(SampleDTO.code == reader_current.id).delete()
+        self._session.delete(reader_current)
         self._session.commit()
 
         

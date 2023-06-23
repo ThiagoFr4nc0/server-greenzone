@@ -64,6 +64,9 @@ class SampleRoutes(Resource):
             abort(403, "Invalid identifier")
         try:
             sample = self._sample_service.find_sample(id)
+            label = self._data_service.find_data(sample.label)
+            if not label.sample_id is None:
+                abort(400, "This data is selected")
         except ValueError as e:
             abort(400, e)
         self._sample_service.patch_close(sample)

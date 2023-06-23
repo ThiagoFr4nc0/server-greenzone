@@ -70,6 +70,9 @@ class DataRoutes(Resource):
         if id < 1:
             abort(403,'Invalid identifier')
         try:
+            data = self._data_service.find_data(id)
+            if not data.sample_id is None:
+                abort(400, "First dele sample")
             self._data_service.delete_data(id)
         except IndexError as e:
             abort(404, str(e))

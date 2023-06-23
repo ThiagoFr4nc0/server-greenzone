@@ -42,7 +42,7 @@ class SampleService():
         sample:SampleDTO = self.__sample_repository.find(id)
         if sample is None:
             raise IndexError(" not found") 
-        self.__sample_repository.delete(sample)
+        self.__sample_repository.delete_all(sample.id)
 
 
     def find_file(self, name):
